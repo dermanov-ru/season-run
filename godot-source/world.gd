@@ -20,6 +20,8 @@ var hearts:=3
 var score:=0
 var time:=0.0
 var inv:=0.0
+var collision_notice := ""
+var collision_notice_time := 0.0
 var paused:=true
 var finish:=false
 var mode := "level"
@@ -331,7 +333,8 @@ func _process(dt):
   else:info.text="ENTER — старт   |   ← → / A D — дорожка   |   Пробел — двойной прыжок\nP — пауза   •   R — заново   •   Зимний перевал, 400 м"
   label.text=hud_text()
   return
- info.text="← → — дорожка    •    Пробел × 2 — двойной прыжок    •    P — пауза"
+ collision_notice_time=max(0,collision_notice_time-dt)
+ info.text=collision_notice if collision_notice_time>0 else "← → — дорожка    •    Пробел × 2 — двойной прыжок    •    P — пауза"
  time+=dt
  if is_instance_valid(runner_anim):runner_anim.speed_scale=1.5 if y<.1 else .3
  speed=min(26,11+current_level*.9+time*.05) if mode=="level" else min(26,12+time*.12)
@@ -368,16 +371,25 @@ func _process(dt):
   c.position.z+=step
   if c.position.z>16:c.position.z-=192
  for o in obstacles:
+  var previous_z: float=o.position.z
   o.position.z+=step
-  if not o.get_meta("hit") and o.position.z>=-.65 and o.position.z<1 and abs(o.position.x-hero.position.x)<.8 and y<2.65:
+  # Sweep the travelled distance so a slow frame cannot skip a collision.
+  var crosses_runner: bool=previous_z<1.0 and o.position.z>=-1.0
+  if not o.get_meta("hit") and crosses_runner and abs(o.position.x-hero.position.x)<1.05 and y<2.65:
    o.set_meta("hit",true)
    if armor>0 or boost>0 or effect=="giant":
-    if armor>0:armor-=1
+    if armor>0:
+     armor-=1
+     collision_notice="Броня поглотила удар • осталось %d"%armor
+    else:collision_notice="Ускорение / великан: препятствие разбито"
+    collision_notice_time=1.6
     smashed+=1;bonus+=20;o.visible=false
    elif inv<=0:
     hearts-=1;lost+=1;inv=1.6;o.visible=false
+    collision_notice="Удар! −1 жизнь • осталось %d"%hearts
+    collision_notice_time=1.6
     if hearts<=0:end_run(false)
-  if not o.get_meta("hit") and o.position.z>=0 and abs(o.position.x-hero.position.x)<.8 and y>=2.65:
+  if not o.get_meta("hit") and crosses_runner and abs(o.position.x-hero.position.x)<1.05 and y>=2.65:
    jumped+=1;bonus+=15;o.set_meta("hit",true)
   if o.position.z>12:
    o.position.z-=180
