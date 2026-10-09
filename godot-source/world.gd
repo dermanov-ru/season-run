@@ -408,7 +408,7 @@ func hud_text()->String:
  var title: String=levels[current_level].name if mode=="level" else "Бесконечный забег"
  var goal: String=(" / %d"%int(levels[current_level].length)) if mode=="level" else ""
  return "%s   •   %s
-✦ %d    ♥ %d    ◈ Броня %d    •    %d%s м%s"%[title,seasons[int(round(season))%4],score,hearts,armor,distance,goal,("   •   "+effect) if effect!="" else ""]
+Монеты %d    Жизни %d    Броня %d    •    %d%s м%s"%[title,seasons[int(round(season))%4],score,hearts,armor,distance,goal,("   •   "+effect) if effect!="" else ""]
 func restart_run(new_mode: String, index: int):
  get_tree().set_meta("run_mode",new_mode)
  get_tree().set_meta("run_level",index)
@@ -471,6 +471,7 @@ func end_run(success: bool):
   file.store_string(JSON.stringify(stars))
  var column:=VBoxContainer.new()
  result.add_child(column)
+ result.show()
  var msg:=Label.new()
  msg.add_theme_font_size_override("font_size",28)
  msg.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
