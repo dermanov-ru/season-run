@@ -42,6 +42,8 @@ public:
  virtual void Tick(float Delta) override;
 private:
  int32 VerifyStage=0, VerifyHeart=-1;
+ int32 TrailerPit=-1;
+ float TrailerJumpAt=-1;
  enum class EKind { Coin, Snowman, Mudman, Boost, Heart };
  struct FItem { float X,Y; EKind Kind; bool Done=false; int32 Index; float Z=105; };
  struct FPit { float Start,End,Y; bool Done=false,Wide=false; };

@@ -40,9 +40,11 @@
 
 ## Unreal Engine — бесконечный зимний забег
 
-**[▶ Посмотреть короткое видео без установки](https://dermanov-ru.github.io/season-run/unreal.html)** · [Видео на VideoHub](https://videohub.dermanov.ru/watch/d1fb1e2907a78b5e)
+**[▶ Посмотреть короткое видео без установки](https://dermanov-ru.github.io/season-run/unreal.html)** · [Видео на VideoHub](https://videohub.dermanov.ru/watch/627af461c86e635c)
 
-[![Видео Unreal-раннера: нажмите, чтобы посмотреть](docs/screenshots/unreal-video-poster.jpg)](https://dermanov-ru.github.io/season-run/unreal.html)
+https://github.com/user-attachments/assets/77caf5f1-9e3f-4157-83aa-0c647860b82e
+
+30 секунд игрового демо: разгон на стрелках, снеговики, двойные прыжки через ямы и подбор сердечек. Музыка добавлена к записи; видеоряд записан непрерывно. Автоматическое управление используется только для демонстрации.
 
 [Редактируемый проект и описание](unreal-source/README.md) — нативный прототип на Unreal Engine 5.8. Здесь он представлен исходниками, скриншотом и видео: браузерной сборки и отдельного скачивания игры нет.
 

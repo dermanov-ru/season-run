@@ -61,7 +61,7 @@ void ARunCharacter::BeginPlay() {
  if (auto* Anim=LoadObject<UAnimSequence>(nullptr,TEXT("/Game/StackOBot/Characters/Bot/Animations/A_Bot_Run.A_Bot_Run"))) GetMesh()->PlayAnimation(Anim,true);
 }
 void ARunCharacter::SaveProgress() {
- if(!Progress) return;
+ if(!Progress || FParse::Param(FCommandLine::Get(),TEXT("RunnerTrailer"))) return;
  Progress->BestMeters=FMath::Max(Progress->BestMeters,FMath::Max(0,FMath::FloorToInt(Distance/100)));
  Progress->BestCoins=FMath::Max(Progress->BestCoins,Coins);
  Progress->TotalCoins+=FMath::Max(0,Coins-SavedRunCoins); SavedRunCoins=Coins;
@@ -322,6 +322,37 @@ void ARunCourse::Tick(float Dt) {
   }
  }
 #endif
+ // Optional attract-mode driver for recording: uses normal movement, jumps and collisions.
+ // It never alters user records and is inactive in ordinary play.
+ if(FParse::Param(FCommandLine::Get(),TEXT("RunnerTrailer")) && Runner->Started && !Runner->Finished) {
+  float X=Runner->GetActorLocation().X;
+  int TargetLane=Runner->Lane;
+  float Closest=FLT_MAX;
+  for(const auto& Item:Items) if(!Item.Done && (Item.Kind==EKind::Boost || Item.Kind==EKind::Heart) && Item.X>X-80 && Item.X-X<Closest) {
+   Closest=Item.X-X;TargetLane=FMath::RoundToInt(Item.Y/220.f);
+  }
+  // One early impact makes the subsequent healing pickup visible in the HUD.
+  if(X>2350 && X<3150) TargetLane=0;
+  else for(const auto& Enemy:Enemies) if(Enemy.BreakAge<0 && Enemy.X>X-120 && Enemy.X-X<850 && FMath::Abs(Enemy.Y-TargetLane*220.f)<1) {
+   for(int Candidate=-1;Candidate<=1;Candidate++) {
+    bool Safe=true;
+    for(const auto& Other:Enemies) if(Other.BreakAge<0 && FMath::Abs(Other.X-X)<900 && FMath::Abs(Other.Y-Candidate*220.f)<1) Safe=false;
+    if(Safe) {TargetLane=Candidate;break;}
+   }
+  }
+  Runner->Lane=TargetLane;
+  for(int I=0;I<Pits.Num();I++) {
+   const auto& Pit=Pits[I];
+   if(!Pit.Wide && FMath::Abs(Pit.Y-TargetLane*220.f)>1) continue;
+   float Lead=FMath::Max(360.f,Runner->Speed*.37f);
+   if(I!=TrailerPit && Pit.Start-X>0 && Pit.Start-X<Lead) {
+    TrailerPit=I;TrailerJumpAt=Runner->Elapsed;Runner->StopJumping();Runner->Jump();
+   }
+  }
+  if(TrailerJumpAt>=0 && Runner->Elapsed-TrailerJumpAt>.22f) {
+   Runner->StopJumping();Runner->Jump();TrailerJumpAt=-1;
+  }
+ }
  UpdateDaylight(Runner->Elapsed);
  if(!Runner->Started || Runner->Paused || Runner->Finished) return;
  if(Runner->GetActorLocation().X>=ARunCharacter::LoopLength) {
