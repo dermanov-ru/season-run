@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Короткая запись Season Run на Unreal Engine: зимняя дорога, снеговики, монеты и ускорение. Смотрите без установки игры.">
+  <title>Season Run — видео Unreal-версии</title>
+  <style>
+    :root{color-scheme:dark;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#08111c;color:#edf5ff}
+    *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% 0,#18394a 0,transparent 55%),#08111c;min-height:100vh}
+    .wrap{max-width:1120px;margin:auto;padding:32px 24px 40px}header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:48px}
+    .brand{font-weight:800;letter-spacing:.09em;text-decoration:none;color:#eff8ff}header a:last-child{color:#a9c6d5;text-decoration:none;font-size:14px}
+    .eyebrow{text-transform:uppercase;letter-spacing:.16em;font-size:12px;color:#79d9e9;font-weight:650}h1{font-size:clamp(28px,5vw,52px);line-height:1.12;letter-spacing:-.045em;margin:14px 0 16px;max-width:800px}
+    .intro{max-width:780px;line-height:1.6;color:#abc0ce;margin:0 0 28px;font-size:17px}.screen{overflow:hidden;border-radius:18px;border:1px solid #33505c;background:#000;box-shadow:0 28px 80px #0007}
+    video{width:100%;aspect-ratio:16/9;display:block;background:#000}.caption{display:flex;gap:16px;justify-content:space-between;flex-wrap:wrap;padding:16px 20px;background:#101e2c;color:#a3bdcd;font-size:13px}.caption strong{color:#e5eff6;font-weight:550}
+    .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}.button{padding:13px 20px;background:#7be2ed;color:#082331;border-radius:10px;font-weight:650;text-decoration:none;display:inline-block}.button.secondary{background:#152636;color:#d3e5f2;border:1px solid #304857}
+    a:focus-visible,video:focus-visible{outline:3px solid #7be2ed;outline-offset:4px}.notes{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:36px}.notes h2{font-size:16px;margin:0 0 8px}.notes p{color:#90a9ba;font-size:14px;line-height:1.6;margin:0}footer{margin-top:40px;border-top:1px solid #203442;padding-top:20px;color:#738c9e;font-size:12px;line-height:1.6}footer a{color:#a8c3d5}
+    @media(max-width:640px){.wrap{padding:22px 16px}header{margin-bottom:32px}.notes{grid-template-columns:1fr;gap:20px}.actions .button{flex:1;text-align:center;min-width:150px}.screen{border-radius:12px}.intro{font-size:15px}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header><a class="brand" href="./">SEASON RUN</a><a href="https://github.com/dermanov-ru/season-run">Проект на GitHub ↗</a></header>
+    <div class="eyebrow">Unreal Engine · игровое демо</div>
+    <h1>Зимний забег.<br>Посмотреть без установки.</h1>
+    <p class="intro">Короткая запись Unreal-версии раннера: снежная дорога, живые снеговики, сбор монет и плавное ускорение. Нажмите ▶, чтобы посмотреть.</p>
+    <section class="screen" aria-label="Видео игрового процесса Season Run">
+      <video controls playsinline preload="metadata" poster="docs/screenshots/unreal-video-poster.jpg" aria-label="Season Run — зимний раннер на Unreal Engine">
+        <source src="https://videohub.dermanov.ru/storage/originals/d1fb1e2907a78b5e.mp4" type="video/mp4">
+        Ваш браузер не поддерживает видео. <a href="https://videohub.dermanov.ru/watch/d1fb1e2907a78b5e">Посмотреть на VideoHub</a>.
+      </video>
+      <div class="caption"><strong>Season Run — Unreal Engine</strong><span>11 секунд · 720p · со звуком</span></div>
+    </section>
+    <div class="actions">
+      <a class="button" href="./">Играть в браузерную 3D-версию</a>
+      <a class="button secondary" href="https://videohub.dermanov.ru/watch/d1fb1e2907a78b5e">Открыть на VideoHub ↗</a>
+      <a class="button secondary" href="https://github.com/dermanov-ru/season-run/tree/main/unreal-source">Исходники Unreal ↗</a>
+    </div>
+    <div class="notes">
+      <section><h2>Бесконечная дорога</h2><p>Забег продолжается после первого круга. Метры, монеты и рекорды сохраняются.</p></section>
+      <section><h2>День и ночь</h2><p>Освещение меняется во время забега. Ночью в небе появляются созвездия.</p></section>
+      <section><h2>Всё быстрее</h2><p>Каждая стрелка добавляет немного скорости. Прибавки накапливаются без потолка.</p></section>
+    </div>
+    <footer>Видео размещено на <a href="https://videohub.dermanov.ru/watch/d1fb1e2907a78b5e">VideoHub</a>. Это запись игры, а не интерактивная Unreal-сборка.<br>Робот: Stack O Bot / Epic Games. Окружение: Poly Haven (CC0). Музыка Night Flight создана для проекта.</footer>
+  </main>
+</body>
+</html>

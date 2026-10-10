@@ -2,6 +2,8 @@
 
 Нативный C++-прототип на Unreal Engine 5.8. В основном [README](../README.md) есть браузерные игры для запуска без установки; эта папка хранит редактируемый Unreal-проект, а не готовую игру для скачивания.
 
+**[▶ Смотреть игровое видео](https://dermanov-ru.github.io/season-run/unreal.html)** · [VideoHub](https://videohub.dermanov.ru/watch/d1fb1e2907a78b5e)
+
 ![Игровой кадр Unreal Engine](../docs/screenshots/unreal-day.jpg)
 
 ## Возможности
