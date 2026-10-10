@@ -1,0 +1,15 @@
+Binaries/
+Intermediate/
+DerivedDataCache/
+Saved/
+TestResults/
+.vs/
+.idea/
+*.sln
+*.xcodeproj/
+*.xcworkspace/
+*.log
+*-import.json
+art-bounds.json
+Content/StackOBot/
+.DS_Store
